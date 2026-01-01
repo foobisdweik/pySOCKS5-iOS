@@ -13,7 +13,7 @@ PiHole and a SOCKS5 proxy server rolled into one convenient script!
 1.  OpenPythonista 3.
 2.  Drop `pySOCKS5.py` (and/or `debug_pySOCKS5.py' if you want to diagnose a connection issue`) into your script folder.
 3.  Activate your iPhone's personal hotspot.
-4.  Make a note of the IPv4 and IPv6 addresses (Windows will list them under Gateway Address) your client device sees when it connects to your hotspot
+4.  Make a note of the IPv4 and IPv6 addresses your client device sees when it connects to your hotspot (Windows will list them under Gateway Address).
 5.  Run the script. 
 
 > **Note:** To kill the script, simply press the "X" button in Pythonista. The script is designed to catch the kill signal and release the port immediately.

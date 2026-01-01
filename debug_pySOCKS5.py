@@ -39,9 +39,7 @@ BLOCKLIST = {
     "analytics.google.com",
     "pagead2.googlesyndication.com",
     "scorecardresearch.com",
-    "quantserve.com",
-    "connect.facebook.net",
-    "pixel.facebook.com"
+    "quantserve.com"
 }
 
 USE_REMOTE_BLOCKLIST = True
@@ -195,4 +193,5 @@ class SOCKS5Server:
 
 if __name__ == '__main__':
     try: asyncio.run(SOCKS5Server().run())
+
     except KeyboardInterrupt: sys.exit(0)

@@ -28,11 +28,11 @@ This offers the most granular control, allowing you to route specific apps while
 * **Server Address:** `172.20.10.1` (or whatever your iphone's IP address is)
 * **Port:** `9999`
 * **Protocol:** SOCKS Version 5
-* **Recommended Rule Order:**
+* **My Perosnal Rule Order:**
     1.  **Any Application** (%ComputerName%; 127.0.0.1 - 127.255.255.255; ::1; localhost; fd00:: - fdff:ffff:ffff:ffff:ffff:ffff:ffff:ffff) -> **Action: Direct** (Crucial for system stability).
     2.  **Any Application** ([iPhone IPv6 address]; [iPhone IPv4 address`) -> **Action: Direct** (Allows DNS resolution).
-    3.  **Any Application** (Microsoft/Ad domains) -> **Action: Block** (Saves data).
-    4.  **Work Apps** (Edge, Update) -> **Action: Proxy**.
+    3.  **Any Application** (Microsoft/Ad domains) -> **Action: Block** (For prevention of script crashes. Grab a list of notorious domains and put them here).
+    4.  **Apps You Want to Tunnel** (Web browser, ) -> **Action: Proxy**.
     5.  **Default Apps** -> **Action: Direct** (Prevents leaks).
 
 ### Option 2: Tun2Socks + WinTun ###

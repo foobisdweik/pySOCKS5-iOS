@@ -24,9 +24,6 @@ BLOCKLIST = {
     # Social/Other
     "scorecardresearch.com",
     "quantserve.com",
-    "facebook.com", # Optional: Remove if you use FB
-    "connect.facebook.net",
-    "pixel.facebook.com"
 }
 
 # 2. REMOTE BLOCKLIST (The "Real" Pi-hole)
@@ -168,3 +165,4 @@ if __name__ == '__main__':
     try: asyncio.run(SOCKS5Server().run())
 
     except KeyboardInterrupt: sys.exit(0)
+

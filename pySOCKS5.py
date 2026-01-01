@@ -14,7 +14,7 @@ BLOCKLIST = {
     "settings-win.data.microsoft.com",
     "telemetry.microsoft.com",
     "browser.events.data.msn.com",
-    # Google Ads/Tracking (BUT NOT GMAIL/YOUTUBE)
+    # Google Ads/Tracking
     "doubleclick.net",
     "googleadservices.com",
     "adservice.google.com",
@@ -166,4 +166,5 @@ class SOCKS5Server:
 
 if __name__ == '__main__':
     try: asyncio.run(SOCKS5Server().run())
+
     except KeyboardInterrupt: sys.exit(0)

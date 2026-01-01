@@ -1,5 +1,6 @@
 # pySOCKS5-iOS #
 PiHole and a SOCKS5 proxy server rolled into one convenient script!
+Inspired by [nneonneo's work of art](https://github.com/nneonneo/iOS-SOCKS-Server) 
 
 100% guaranteed to bypass carrier throttling of client devices connected to an iPhone hotspot. It uses asyncio for high performance and includes a built-in DNS Sinkhole (Pi-hole) to save cellular bandwidth.
 

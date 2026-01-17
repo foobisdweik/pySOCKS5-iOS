@@ -326,10 +326,7 @@ Use it, modify it, break it, ship it.
 
 ---
 
-# Technical Deep Dive: How This Works on iOS 26.x
-
-> **Recommended file split:**  
-> Move everything below this heading into `DEEP_DIVE.md`
+# Technical Deep Dive: How This Works on iOS 26.
 
 ---
 

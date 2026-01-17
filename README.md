@@ -1,4 +1,4 @@
-# pySOCKS5-iOS
+[Generic_Proxifier_Template.xml](https://github.com/user-attachments/files/24685793/Generic_Proxifier_Template.xml)# pySOCKS5-iOS
 **Bypass carrier-induced hotspot throttling with a working, persistent SOCKS5 proxy on iOS 26.3 (iPhone 16)**
 
 `pySOCKS5` turns an iPhone into a long-running SOCKS5 gateway suitable for hotspot tunneling and full system traffic routing on connected clients. Under the documented baseline configuration, it remains active for hours with the display asleep and no user interaction.
@@ -115,7 +115,145 @@ Proxifier is the preferred Windows client because it allows:
 - Full system traffic capture
 - Deterministic routing under throttled hotspots
 
-A **generic Proxifier profile template** can be included in this repository and imported directly.
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<ProxifierProfile version="4.11">
+
+  <!-- ===================================================== -->
+  <!-- Proxy Definitions                                    -->
+  <!-- ===================================================== -->
+  <ProxyServers>
+    <ProxyServer id="1">
+      <Address>172.20.10.1</Address>
+      <Port>9999</Port>
+      <Protocol>SOCKS5</Protocol>
+
+      <!-- Authentication intentionally disabled -->
+      <Authentication enabled="false" />
+
+      <!-- Critical for throttled hotspots -->
+      <ResolveThroughProxy enabled="true" />
+
+      <Description>
+        iPhone SOCKS5 Proxy (Pythonista / iOS Hotspot)
+      </Description>
+    </ProxyServer>
+  </ProxyServers>
+
+  <!-- ===================================================== -->
+  <!-- Global Options                                       -->
+  <!-- ===================================================== -->
+  <Options>
+
+    <!-- Force DNS through SOCKS to avoid throttling/leaks -->
+    <NameResolution>
+      <ResolveHostnamesThroughProxy enabled="true" />
+    </NameResolution>
+
+    <!-- Prevent Windows fallback to direct connections -->
+    <LeakPreventionMode enabled="true" />
+
+    <!-- Conservative timeouts for cellular backhaul -->
+    <ConnectionTimeout>10</ConnectionTimeout>
+    <HandshakeTimeout>10</HandshakeTimeout>
+
+    <!-- UDP kept disabled by default for stability -->
+    <UdpSupport enabled="false" />
+
+  </Options>
+
+  <!-- ===================================================== -->
+  <!-- Proxification Rules                                  -->
+  <!-- ===================================================== -->
+  <Rules>
+
+    <!-- ------------------------------------------------- -->
+    <!-- Direct Access: iPhone Hotspot Gateway             -->
+    <!-- Prevents routing loops                            -->
+    <!-- ------------------------------------------------- -->
+    <Rule enabled="true">
+      <Name>DIRECT - iOS Hotspot Gateway</Name>
+      <Applications>Any</Applications>
+      <Targets>
+        <Target type="IP">172.20.10.1</Target>
+      </Targets>
+      <Action type="Direct" />
+    </Rule>
+
+    <!-- ------------------------------------------------- -->
+    <!-- Proxy: DNS Traffic                                -->
+    <!-- Explicit rule for clarity/debugging               -->
+    <!-- ------------------------------------------------- -->
+    <Rule enabled="true">
+      <Name>PROXY - DNS via SOCKS</Name>
+      <Applications>Any</Applications>
+      <Targets>
+        <Target type="Port">53</Target>
+      </Targets>
+      <Action type="Proxy">
+        <ProxyRef id="1" />
+      </Action>
+    </Rule>
+
+    <!-- ------------------------------------------------- -->
+    <!-- Proxy: System Services (Truncated)                -->
+    <!-- Real profile contained more entries               -->
+    <!-- ------------------------------------------------- -->
+    <Rule enabled="true">
+      <Name>PROXY - System Services</Name>
+      <Applications>
+        <Application>svchost.exe</Application>
+        <Application>System</Application>
+        <Application>lsass.exe</Application>
+        <!-- additional services omitted -->
+      </Applications>
+      <Targets>
+        <Target type="Hostname">*.microsoft.com</Target>
+        <Target type="Hostname">*.windowsupdate.com</Target>
+        <Target type="Hostname">*.msftconnecttest.com</Target>
+        <!-- additional domains omitted -->
+      </Targets>
+      <Action type="Proxy">
+        <ProxyRef id="1" />
+      </Action>
+    </Rule>
+
+    <!-- ------------------------------------------------- -->
+    <!-- Proxy: Common Applications (Truncated)            -->
+    <!-- ------------------------------------------------- -->
+    <Rule enabled="true">
+      <Name>PROXY - User Applications</Name>
+      <Applications>
+        <Application>chrome.exe</Application>
+        <Application>firefox.exe</Application>
+        <Application>edge.exe</Application>
+        <Application>steam.exe</Application>
+        <!-- list intentionally truncated -->
+      </Applications>
+      <Targets>Any</Targets>
+      <Action type="Proxy">
+        <ProxyRef id="1" />
+      </Action>
+    </Rule>
+
+    <!-- ------------------------------------------------- -->
+    <!-- Default Rule: Tunnel Everything                   -->
+    <!-- Required once hotspot throttling applies          -->
+    <!-- ------------------------------------------------- -->
+    <Rule enabled="true">
+      <Name>PROXY - Default (Tunnel All)</Name>
+      <Applications>Any</Applications>
+      <Targets>Any</Targets>
+      <Action type="Proxy">
+        <ProxyRef id="1" />
+      </Action>
+    </Rule>
+
+  </Rules>
+
+</ProxifierProfile>
+```
+
 
 This configuration is designed for situations where:
 - Hotspot data caps are exceeded

@@ -1,4 +1,4 @@
-[Generic_Proxifier_Template.xml](https://github.com/user-attachments/files/24685793/Generic_Proxifier_Template.xml)# pySOCKS5-iOS
+# pySOCKS5-iOS
 **Bypass carrier-induced hotspot throttling with a working, persistent SOCKS5 proxy on iOS 26.3 (iPhone 16)**
 
 `pySOCKS5` turns an iPhone into a long-running SOCKS5 gateway suitable for hotspot tunneling and full system traffic routing on connected clients. Under the documented baseline configuration, it remains active for hours with the display asleep and no user interaction.

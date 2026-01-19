@@ -13,12 +13,12 @@ from objc_util import ObjCClass, NSURL, ns, on_main_thread, c_void_p, sel
 # [PHASE 1] STABLE TOGGLES (These work on iOS 26.3 / iPhone 16 Family)
 #... mostly.
 # =========================================================================
-ENABLE_IPV6          = True   # Support IPv6 requests from OMEN
+ENABLE_IPV6          = True   # Support IPv6 requests from client
 LOW_LATENCY_MODE     = True   # Disable Nagle's Algorithm (TCP_NODELAY)
 HIGH_THROUGHPUT_MODE  = True   # Maximize buffer sizes for A18 SOC
 AUDIO_HEARTBEAT      = True   # Play silent hum to prevent iOS sleep
 VERBOSE_LOGGING      = True   # Show [CONN] requests in console
-LISTEN_PORT          = 9999   # Port for Proxifier to connect to
+LISTEN_PORT          = 9999   # Port for client to connect to
 
 # =================================================================
 # [PHASE 2] EXPERIMENTAL/LEGACY (DO NOT ENABLE - FOR FUTURE DEVS)
@@ -262,3 +262,4 @@ if __name__ == '__main__':
     start_audio_keep_alive()
     try: asyncio.run(main())
     except KeyboardInterrupt: sys.exit(0)
+

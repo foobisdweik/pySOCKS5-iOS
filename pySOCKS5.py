@@ -11,6 +11,7 @@ from objc_util import ObjCClass, NSURL, ns, on_main_thread, c_void_p, sel
 
 # =========================================================================
 # [PHASE 1] STABLE TOGGLES (These work on iOS 26.3 / iPhone 16 Family)
+#... mostly.
 # =========================================================================
 ENABLE_IPV6          = True   # Support IPv6 requests from OMEN
 LOW_LATENCY_MODE     = True   # Disable Nagle's Algorithm (TCP_NODELAY)
